@@ -2,6 +2,7 @@ import time
 import math
 import requests
 import re
+import json
 from module.kipaContent import ingredients
 
 baseUrl = "http://kapimda.kipa.com.tr/tr-TR/"
@@ -24,8 +25,15 @@ p = re.compile(pageItemPattern)
 
 productIds = p.findall(listSource)
 
-#print(productIds)
+with open('wikitrecode.txt') as data_file:
+    data = json.load(data_file)
 
+print(productIds[5])
+
+for a in ingredients(productIds[5]):
+    print(a)
+
+'''
 a = 0
 for i in productIds:
     print(ingredients(i))
@@ -33,3 +41,4 @@ for i in productIds:
 
     if a % 5 == 0:
         time.sleep(1)
+'''

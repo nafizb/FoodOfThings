@@ -1,6 +1,6 @@
 import requests
 import re
-
+import json
 
 link = 'https://tr.wikipedia.org/wiki/G%C4%B1da_katk%C4%B1lar%C4%B1_listesi'
 page = requests.get(link)
@@ -16,6 +16,15 @@ compiled = re.compile(chemicalPattern)
 
 match = compiled.findall(content)
 
+data = {}
+
+
 for code, name in match:
-    print(code + ' => ' + name)
+    data[name] = code
+    #print(code + ' => ' + name)
+
+
+with open('wikitrecode.txt', 'w') as f:
+    json.dump(data, f, ensure_ascii=False)
+
 
